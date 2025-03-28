@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Cart</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+</head>
+<body>
+	<!-- Header -->
+	<header class="bg-dark text-white">
+		<nav class="navbar navbar-expand-lg navbar-dark container">
+			<a class="navbar-brand" href="/home/index">My Shop</a>
+
+			<!-- Toggle button cho mobile -->
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Navbar content -->
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<!-- Dropdown danh mục -->
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Categories </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/product/list-by-category/1">Game</a>
+							<a class="dropdown-item" href="/product/list-by-category/2">Electronic
+								Devices</a> <a class="dropdown-item"
+								href="/product/list-by-category/3">Furniture</a> <a
+								class="dropdown-item" href="/product/list-by-category/4">Clothing</a>
+							<a class="dropdown-item" href="/product/list-by-category/5">Books</a>
+						</div></li>
+				</ul>
+
+				<!-- Thanh tìm kiếm ở giữa -->
+				<form action="/product/search" method="get"
+					class="search-bar mx-auto">
+					<div class="input-group">
+						<input type="text" name="name" class="form-control"
+							placeholder="Search..." aria-label="Search">
+						<button class="btn btn-outline-light" type="submit">
+							<i class="bi bi-search"></i>
+						</button>
+					</div>
+				</form>
+
+
+				<!-- Giỏ hàng & Đăng xuất (căn phải) -->
+				<ul class="navbar-nav ms-auto">
+					<!-- Giỏ hàng -->
+					<li class="nav-item"><a class="nav-link position-relative"
+						href="/cart"> <i class="bi bi-cart3 fs-5"></i> Giỏ hàng
+
+					</a></li>
+
+					<!-- Nút đăng xuất -->
+					<li class="nav-item ms-3"><a
+						class="btn btn-danger text-white px-3 rounded-pill"
+						href="/account/logout"> <i class="bi bi-box-arrow-right"></i>
+							Đăng xuất
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- Body -->
+	<main class="container mt-4">
+		<h1 class="text-center">Your Cart</h1>
+
+		<!-- Check if cart is empty -->
+		<div th:if="${cartItems == null or cartItems.isEmpty()}">
+			<p class="text-center">Your cart is empty.</p>
+		</div>
+
+		<!-- If cart is not empty -->
+		<div th:unless="${cartItems == null or cartItems.isEmpty()}">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Total</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${cartItems}">
+						<td th:text="${item.product.name}"></td>
+						<td>
+							<form th:action="@{/cart/update}" method="post" class="d-flex">
+								<input type="hidden" th:value="${item.product.id}" name="id" />
+								<input type="number" th:value="${item.quantity}" name="quantity"
+									class="form-control mr-2" min="1" />
+								<button type="submit" class="btn btn-primary btn-sm">Update</button>
+							</form>
+						</td>
+						<td th:text="${item.product.price}"></td>
+						<td th:text="${item.total}"></td>
+						<td><a th:href="@{/cart/remove/{id}(id=${item.product.id})}"
+							class="btn btn-danger btn-sm">Remove</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+			
+			<div class="text-right ">
+				<h4>
+					Total: <span th:text="${total}"></span>
+				</h4>
+			</div>
+	
+			<div class="text-right">
+				<a href="/checkout" class="btn btn-success m-1">Proceed to Checkout</a>	
+				<a href="/cart/clear" class="btn btn-warning m-1">Clear Cart</a> 
+			</div>
+
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-dark text-white text-center py-3">
+		<p>&copy; HaHuynhHuyTuan_TS00576.</p>
+	</footer>
+	
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

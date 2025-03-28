@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">    
+    <title>Product Detail</title>
+</head>
+<body>
+   <!-- Header -->
+    <header class="bg-dark text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <a class="navbar-brand" href="/home/index">My Shop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/product/list-by-category/1">Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/product/list-by-category/2">Electronic Devices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart">
+                            <i class="fas fa-shopping-cart"></i> 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<div class="container-fluid">
+    <h1>Product Details</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="${product.image}" class="img-fluid mb-3" alt="Product Image" />
+        </div>
+        <div class="col-md-6"> 	
+            <h2 th:text="${product.name}"></h2>
+            <p>Price: $<span th:text="${product.price}"></span></p>
+            <p>Category: <span th:text="${product.category}"></span></p>
+            <a th:href="@{/cart/add/{id}(id=${product.id})}" class="btn btn-success">Add to Cart</a>
+            <a href="/home/index" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; HaHuynhHuyTuan_TS00576.</p>
+    </footer>   
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

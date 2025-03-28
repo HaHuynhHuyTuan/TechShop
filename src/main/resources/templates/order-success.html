@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Success</title>
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center text-success">Order Placed Successfully!</h1>
+        <p class="text-center">Thank you for your order. We will process it soon.</p>
+        <div class="text-center">
+			<a th:href="@{/home/index}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
